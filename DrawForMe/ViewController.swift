@@ -7,14 +7,34 @@
 //
 
 import UIKit
+import PencilKit
 
-class ViewController: UIViewController {
+class DrawingViewController: UIViewController {
+
+	var canvasView: PKCanvasView!
+
+	@IBOutlet private weak var drawingContainer: UIView!
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view.
+
+		initCanvasView()
 	}
 
+	private func initCanvasView() {
+		let canvasView = PKCanvasView(frame: drawingContainer.bounds)
+		self.canvasView = canvasView
+		self.drawingContainer.addSubview(canvasView)
 
+		NSLayoutConstraint.activate([
+			self.canvasView.topAnchor.constraint(equalTo: drawingContainer.topAnchor),
+			self.canvasView.bottomAnchor.constraint(equalTo: drawingContainer.bottomAnchor),
+			self.canvasView.leadingAnchor.constraint(equalTo: drawingContainer.leadingAnchor),
+			self.canvasView.trailingAnchor.constraint(equalTo: drawingContainer.trailingAnchor)
+		])
+		self.canvasView.backgroundColor = .lightGray
+		self.canvasView.tool = PKInkingTool(.pen, color: .orange, width: 10)
+		canvasView.allowsFingerDrawing = true
+	}
 }
 

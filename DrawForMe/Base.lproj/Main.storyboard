@@ -14,55 +14,42 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fvx-r0-txz">
+                                <rect key="frame" x="16" y="103" width="126" height="30.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not Connected" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Zz-Uj-7s3">
+                                        <rect key="frame" x="20" y="8" width="86" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="4Zz-Uj-7s3" secondAttribute="trailing" constant="20" id="GwQ-Ma-jYV"/>
+                                    <constraint firstItem="4Zz-Uj-7s3" firstAttribute="top" secondItem="Fvx-r0-txz" secondAttribute="top" constant="8" id="Iw8-QZ-Y8f"/>
+                                    <constraint firstAttribute="bottom" secondItem="4Zz-Uj-7s3" secondAttribute="bottom" constant="8" id="VIs-bq-Nur"/>
+                                    <constraint firstAttribute="width" constant="126" id="eBb-fc-mxk"/>
+                                    <constraint firstItem="4Zz-Uj-7s3" firstAttribute="leading" secondItem="Fvx-r0-txz" secondAttribute="leading" constant="20" id="nEr-VK-caY"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Fvx-r0-txz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="1jo-8o-2CE"/>
+                            <constraint firstItem="Fvx-r0-txz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="1v9-Ml-ynd"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Drawing Canvas" id="UVH-uZ-yFj"/>
+                    <connections>
+                        <outlet property="connectionIndicatorLabel" destination="4Zz-Uj-7s3" id="opf-eP-hMI"/>
+                        <outlet property="connectionIndicatorView" destination="Fvx-r0-txz" id="J4u-Jr-lqu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1065" y="260"/>
-        </scene>
-        <!--Peer Connection View Controller-->
-        <scene sceneID="dLn-uC-KB2">
-            <objects>
-                <viewController storyboardIdentifier="PeerConnectionViewController" id="BoW-2a-Rhl" customClass="PeerConnectionViewController" customModule="DrawForMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="oHp-gA-ybV">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Tt-Oj-S0s">
-                                <rect key="frame" x="181" y="309" width="33" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Host"/>
-                                <connections>
-                                    <action selector="hostAction:" destination="BoW-2a-Rhl" eventType="touchUpInside" id="mB4-Gf-qdJ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mae-Wf-Apr">
-                                <rect key="frame" x="182" y="492" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Join"/>
-                                <connections>
-                                    <action selector="joinAction:" destination="BoW-2a-Rhl" eventType="touchUpInside" id="edd-jc-usn"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vfz-Da-OTl">
-                                <rect key="frame" x="170" y="634" width="69" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Send Test"/>
-                                <connections>
-                                    <action selector="sendTextAction:" destination="BoW-2a-Rhl" eventType="touchUpInside" id="NBT-YV-Pxu"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="FhK-B0-1oJ"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Llq-Lx-U9O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1903" y="260"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kNf-V6-xSd">

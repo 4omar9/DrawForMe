@@ -1,0 +1,26 @@
+PODS:
+  - Queuer (2.1.1)
+  - Realm (5.1.0):
+    - Realm/Headers (= 5.1.0)
+  - Realm/Headers (5.1.0)
+  - RealmSwift (5.1.0):
+    - Realm (= 5.1.0)
+
+DEPENDENCIES:
+  - Queuer
+  - RealmSwift
+
+SPEC REPOS:
+  trunk:
+    - Queuer
+    - Realm
+    - RealmSwift
+
+SPEC CHECKSUMS:
+  Queuer: 65c5f6b821417bc62da23d63d570ec9d22bee4de
+  Realm: bdea546851e37b4cf0a2400cef115c7c26fda488
+  RealmSwift: 70945aa168db93b215c460e9c8ef680261aa28af
+
+PODFILE CHECKSUM: 280e59a6e2299e9ea2237f2c4091435e212e4079
+
+COCOAPODS: 1.9.3

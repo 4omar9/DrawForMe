@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		074CF45B24B89DA200210278 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074CF45A24B89DA200210278 /* AppDelegate.swift */; };
-		074CF45D24B89DA200210278 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074CF45C24B89DA200210278 /* SceneDelegate.swift */; };
 		074CF45F24B89DA200210278 /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074CF45E24B89DA200210278 /* DrawingViewController.swift */; };
 		074CF46224B89DA200210278 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 074CF46024B89DA200210278 /* Main.storyboard */; };
 		074CF46424B89DA300210278 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 074CF46324B89DA300210278 /* Assets.xcassets */; };
@@ -16,7 +15,7 @@
 		074CF47224B89DA400210278 /* DrawForMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074CF47124B89DA400210278 /* DrawForMeTests.swift */; };
 		074CF47D24B89DA400210278 /* DrawForMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074CF47C24B89DA400210278 /* DrawForMeUITests.swift */; };
 		074CF48B24B9C58300210278 /* Sketch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074CF48A24B9C58300210278 /* Sketch.swift */; };
-		074CF48D24B9DF2000210278 /* PeerConnectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074CF48C24B9DF2000210278 /* PeerConnectionViewController.swift */; };
+		079F7C0A24BC6FA0009C4F75 /* AlertView+UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F7C0924BC6FA0009C4F75 /* AlertView+UIAlertController.swift */; };
 		196476FC9D1702FBA73E59C1 /* Pods_DrawForMeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38FC2C68F88EC8915C525322 /* Pods_DrawForMeTests.framework */; };
 		3DE2F9EE856A585F486E5850 /* Pods_DrawForMe_DrawForMeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43FC1D1C373C6D99F70C3DFA /* Pods_DrawForMe_DrawForMeUITests.framework */; };
 		F915E61DFC840B12304A0070 /* Pods_DrawForMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8EED43918BCDFC5D17D65F1 /* Pods_DrawForMe.framework */; };
@@ -43,7 +42,6 @@
 		026D53048DD676D5843C895F /* Pods-DrawForMe-DrawForMeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawForMe-DrawForMeUITests.release.xcconfig"; path = "Target Support Files/Pods-DrawForMe-DrawForMeUITests/Pods-DrawForMe-DrawForMeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		074CF45724B89DA200210278 /* DrawForMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawForMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		074CF45A24B89DA200210278 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		074CF45C24B89DA200210278 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		074CF45E24B89DA200210278 /* DrawingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
 		074CF46124B89DA200210278 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		074CF46324B89DA300210278 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -56,7 +54,7 @@
 		074CF47C24B89DA400210278 /* DrawForMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawForMeUITests.swift; sourceTree = "<group>"; };
 		074CF47E24B89DA400210278 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		074CF48A24B9C58300210278 /* Sketch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch.swift; sourceTree = "<group>"; };
-		074CF48C24B9DF2000210278 /* PeerConnectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerConnectionViewController.swift; sourceTree = "<group>"; };
+		079F7C0924BC6FA0009C4F75 /* AlertView+UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlertView+UIAlertController.swift"; sourceTree = "<group>"; };
 		13448E657A838355E9C38255 /* Pods-DrawForMeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawForMeTests.debug.xcconfig"; path = "Target Support Files/Pods-DrawForMeTests/Pods-DrawForMeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		38FC2C68F88EC8915C525322 /* Pods_DrawForMeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DrawForMeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43FC1D1C373C6D99F70C3DFA /* Pods_DrawForMe_DrawForMeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DrawForMe_DrawForMeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,14 +119,13 @@
 			isa = PBXGroup;
 			children = (
 				074CF45A24B89DA200210278 /* AppDelegate.swift */,
-				074CF45C24B89DA200210278 /* SceneDelegate.swift */,
 				074CF45E24B89DA200210278 /* DrawingViewController.swift */,
 				074CF46024B89DA200210278 /* Main.storyboard */,
 				074CF46324B89DA300210278 /* Assets.xcassets */,
 				074CF46524B89DA400210278 /* LaunchScreen.storyboard */,
 				074CF46824B89DA400210278 /* Info.plist */,
 				074CF48A24B9C58300210278 /* Sketch.swift */,
-				074CF48C24B9DF2000210278 /* PeerConnectionViewController.swift */,
+				079F7C0924BC6FA0009C4F75 /* AlertView+UIAlertController.swift */,
 			);
 			path = DrawForMe;
 			sourceTree = "<group>";
@@ -414,10 +411,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				074CF45F24B89DA200210278 /* DrawingViewController.swift in Sources */,
-				074CF48D24B9DF2000210278 /* PeerConnectionViewController.swift in Sources */,
+				079F7C0A24BC6FA0009C4F75 /* AlertView+UIAlertController.swift in Sources */,
 				074CF48B24B9C58300210278 /* Sketch.swift in Sources */,
 				074CF45B24B89DA200210278 /* AppDelegate.swift in Sources */,
-				074CF45D24B89DA200210278 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

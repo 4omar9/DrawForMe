@@ -22,8 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	private func initializeRealm() {
 
 		do {
-			let realm = try Realm()
-			print(Realm.Configuration.defaultConfiguration.fileURL)
+			_ = try Realm()
+			if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
+				print(fileURL)
+			}
 		} catch let error as NSError {
 			print("[initializeRealm] \(error.localizedDescription)")
 		}

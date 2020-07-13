@@ -16,6 +16,7 @@
 		074CF47D24B89DA400210278 /* DrawForMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074CF47C24B89DA400210278 /* DrawForMeUITests.swift */; };
 		074CF48B24B9C58300210278 /* Sketch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074CF48A24B9C58300210278 /* Sketch.swift */; };
 		079F7C0A24BC6FA0009C4F75 /* AlertView+UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F7C0924BC6FA0009C4F75 /* AlertView+UIAlertController.swift */; };
+		079F7C1024BCB7E1009C4F75 /* DrawingConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F7C0F24BCB7E1009C4F75 /* DrawingConnectionState.swift */; };
 		196476FC9D1702FBA73E59C1 /* Pods_DrawForMeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38FC2C68F88EC8915C525322 /* Pods_DrawForMeTests.framework */; };
 		3DE2F9EE856A585F486E5850 /* Pods_DrawForMe_DrawForMeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43FC1D1C373C6D99F70C3DFA /* Pods_DrawForMe_DrawForMeUITests.framework */; };
 		F915E61DFC840B12304A0070 /* Pods_DrawForMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8EED43918BCDFC5D17D65F1 /* Pods_DrawForMe.framework */; };
@@ -55,6 +56,7 @@
 		074CF47E24B89DA400210278 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		074CF48A24B9C58300210278 /* Sketch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketch.swift; sourceTree = "<group>"; };
 		079F7C0924BC6FA0009C4F75 /* AlertView+UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlertView+UIAlertController.swift"; sourceTree = "<group>"; };
+		079F7C0F24BCB7E1009C4F75 /* DrawingConnectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingConnectionState.swift; sourceTree = "<group>"; };
 		13448E657A838355E9C38255 /* Pods-DrawForMeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawForMeTests.debug.xcconfig"; path = "Target Support Files/Pods-DrawForMeTests/Pods-DrawForMeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		38FC2C68F88EC8915C525322 /* Pods_DrawForMeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DrawForMeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43FC1D1C373C6D99F70C3DFA /* Pods_DrawForMe_DrawForMeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DrawForMe_DrawForMeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,14 +120,13 @@
 		074CF45924B89DA200210278 /* DrawForMe */ = {
 			isa = PBXGroup;
 			children = (
-				074CF45A24B89DA200210278 /* AppDelegate.swift */,
-				074CF45E24B89DA200210278 /* DrawingViewController.swift */,
-				074CF46024B89DA200210278 /* Main.storyboard */,
-				074CF46324B89DA300210278 /* Assets.xcassets */,
-				074CF46524B89DA400210278 /* LaunchScreen.storyboard */,
-				074CF46824B89DA400210278 /* Info.plist */,
-				074CF48A24B9C58300210278 /* Sketch.swift */,
 				079F7C0924BC6FA0009C4F75 /* AlertView+UIAlertController.swift */,
+				074CF45A24B89DA200210278 /* AppDelegate.swift */,
+				074CF48A24B9C58300210278 /* Sketch.swift */,
+				079F7C0F24BCB7E1009C4F75 /* DrawingConnectionState.swift */,
+				074CF45E24B89DA200210278 /* DrawingViewController.swift */,
+				079F7C0C24BCA5ED009C4F75 /* Assets */,
+				079F7C0B24BCA5D6009C4F75 /* Storyboard */,
 			);
 			path = DrawForMe;
 			sourceTree = "<group>";
@@ -146,6 +147,24 @@
 				074CF47E24B89DA400210278 /* Info.plist */,
 			);
 			path = DrawForMeUITests;
+			sourceTree = "<group>";
+		};
+		079F7C0B24BCA5D6009C4F75 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				074CF46524B89DA400210278 /* LaunchScreen.storyboard */,
+				074CF46024B89DA200210278 /* Main.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		079F7C0C24BCA5ED009C4F75 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				074CF46824B89DA400210278 /* Info.plist */,
+				074CF46324B89DA300210278 /* Assets.xcassets */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		9787E21E276E363AB9CE86CA /* Frameworks */ = {
@@ -410,6 +429,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				079F7C1024BCB7E1009C4F75 /* DrawingConnectionState.swift in Sources */,
 				074CF45F24B89DA200210278 /* DrawingViewController.swift in Sources */,
 				079F7C0A24BC6FA0009C4F75 /* AlertView+UIAlertController.swift in Sources */,
 				074CF48B24B9C58300210278 /* Sketch.swift in Sources */,
@@ -589,7 +609,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4275U3NVPF;
-				INFOPLIST_FILE = DrawForMe/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/DrawForMe/Assets/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -608,7 +628,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4275U3NVPF;
-				INFOPLIST_FILE = DrawForMe/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/DrawForMe/Assets/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

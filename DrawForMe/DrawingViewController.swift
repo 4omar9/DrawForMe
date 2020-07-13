@@ -11,22 +11,9 @@ import PencilKit
 import RealmSwift
 import MultipeerConnectivity
 
-enum DrawingConnectionState: Int {
-	case notConnected
-	case host
-	case connectedAsHost
-	case connectedAsObserver
-}
-
 class DrawingViewController: UIViewController {
 
-	var sketch: Sketch?
-	private var canvasView: PKCanvasView!
-	private var peerID: MCPeerID!
-	private var mcSession: MCSession!
-	private var mcAdvertiserAssistant: MCAdvertiserAssistant?
-	private var connectionState: DrawingConnectionState = .notConnected
-
+	//MARK: - IBOutlets
 	@IBOutlet private weak var connectionIndicatorView: UIView! {
 		didSet {
 			connectionIndicatorView.layer.cornerRadius = 10
@@ -34,12 +21,26 @@ class DrawingViewController: UIViewController {
 	}
 	@IBOutlet private weak var connectionIndicatorLabel: UILabel!
 
+	//MARK: - properties
+	private var sketch: Sketch?
+	private var canvasView: PKCanvasView!
+	private var peerID: MCPeerID!
+	private var connectedToPeerID: MCPeerID?
+	private var mcSession: MCSession!
+	private var mcAdvertiserAssistant: MCAdvertiserAssistant?
+	private var connectionState: DrawingConnectionState = .notConnected {
+		didSet {
+			connectionIndicatorLabel.text = connectionState.stateTitle(with: connectedToPeerID?.displayName ?? "")
+		}
+	}
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
 		initCanvasView()
-		setupToolPicker()
+		showToolPicker()
 		initPeerConnection()
+
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(
 			title: "Connect",
 			style: .plain,
@@ -48,17 +49,17 @@ class DrawingViewController: UIViewController {
 		)
 	}
 
-	private func initCanvasView() {
+	private func initCanvasView(sketch: Sketch = Sketch()) {
 		let canvasView = PKCanvasView(frame: view.bounds)
 		canvasView.translatesAutoresizingMaskIntoConstraints = false
 		self.canvasView = canvasView
 		view.addSubview(canvasView)
 		view.sendSubviewToBack(canvasView)
 
-		if let sketch = sketch {
+		if let sketch = self.sketch {
 			canvasView.drawing = sketch.drawing
 		} else {
-			sketch = Sketch()
+			self.sketch = sketch
 		}
 
 		NSLayoutConstraint.activate([
@@ -72,10 +73,10 @@ class DrawingViewController: UIViewController {
 		self.canvasView.delegate = self
 	}
 
-	private func setupToolPicker() {
+	private func showToolPicker() {
 		if let window = self.parent?.view.window,
 			let toolPicker = PKToolPicker.shared(for: window),
-			connectionState != .connectedAsObserver {
+			connectionState.isNotObserver {
 
 			toolPicker.setVisible(true, forFirstResponder: canvasView)
 			toolPicker.addObserver(canvasView)
@@ -92,7 +93,7 @@ class DrawingViewController: UIViewController {
 			try realm.write({
 				sketch.drawing = canvasView.drawing
 			})
-			if connectionState == .connectedAsHost {
+			if connectionState.isConnectedHost {
 				sendDrawing(sketch: sketch.drawingData ?? Data())
 			}
 		} catch {
@@ -117,10 +118,11 @@ class DrawingViewController: UIViewController {
 	}
 
 	func startHosting(action: UIAlertAction) {
-		if connectionState == .host {
+		if connectionState.isHost || connectionState.isConnectedAsObserver {
+			let errorToShow = connectionState.isHost ? "You are already hosting a session" : "You are connected as observer, Disconnect first"
 			UIAlertController
 				.showAlert(
-					title: "You are already hosting a session",
+					title: errorToShow,
 					message: "",
 					actions: [UIAlertAction(title: "Okay", style: .default, handler: nil)]
 			)
@@ -128,15 +130,14 @@ class DrawingViewController: UIViewController {
 		mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "omar-DrawForMe", discoveryInfo: nil, session: mcSession)
 		mcAdvertiserAssistant?.start()
 		connectionState = .host
-		self.connectionIndicatorLabel.text = "Hosting..."
 	}
 
 	func joinSession(action: UIAlertAction) {
-		if connectionState == .host {
+		if connectionState.isHost {
 			UIAlertController
 				.showAlert(
 					title: "You are hosting a session",
-					message: "Disconnect so you can join a session",
+					message: "",
 					actions: [UIAlertAction(title: "Okay", style: .default, handler: nil)]
 			)
 			return
@@ -148,10 +149,9 @@ class DrawingViewController: UIViewController {
 
 	func stopSession(action: UIAlertAction) {
 		guard let mcAdvertiserAssistant = mcAdvertiserAssistant,
-			connectionState != .notConnected else {
+			connectionState.isConnected else {
 				if mcSession.connectedPeers.count >= 1 {
 					mcSession.disconnect()
-					connectionIndicatorLabel.text = "Not Connected"
 				} else {
 			UIAlertController
 				.showAlert(
@@ -164,7 +164,6 @@ class DrawingViewController: UIViewController {
 		}
 		mcAdvertiserAssistant.session.disconnect()
 		mcAdvertiserAssistant.stop()
-		connectionIndicatorLabel.text = "Not Connected"
 		connectionState = .notConnected
 	}
 
@@ -187,32 +186,34 @@ class DrawingViewController: UIViewController {
 	) {
 		DispatchQueue.main.async { [weak self] in
 			guard let self = self else { return }
-
+			self.connectedToPeerID = peerID
 			switch state {
 			case MCSessionState.connected:
-				if self.connectionState == .host {
-					self.connectionState = .connectedAsHost
-					self.connectionIndicatorLabel.text = "Hosting \(peerID.displayName)"
-					self.canvasView.isUserInteractionEnabled = true
-				} else {
-					self.connectionIndicatorLabel.text = "Observing \(peerID.displayName)"
-					self.connectionState = .connectedAsObserver
-					self.canvasView.isUserInteractionEnabled = false
-				}
-
-			case MCSessionState.connecting:
-				self.connectionIndicatorLabel.text = "Connecting to \(peerID.displayName)"
+				self.handleConnectedLogic()
 
 			case MCSessionState.notConnected:
-				self.connectionIndicatorLabel.text = "Not Connected"
-				self.connectionState = .notConnected
-				self.canvasView.isUserInteractionEnabled = true
-				self.setupToolPicker()
+				self.handleNotConnectedLogic()
 
-			@unknown default:
-				self.connectionIndicatorLabel.text = "status unknown"
+			@unknown default: break
 			}
 		}
+	}
+
+
+	func handleConnectedLogic() {
+		if self.connectionState.isHost {
+			self.connectionState = .connectedAsHost
+			self.canvasView.isUserInteractionEnabled = true
+		} else {
+			self.connectionState = .connectedAsObserver
+			self.canvasView.isUserInteractionEnabled = false
+		}
+	}
+
+	func handleNotConnectedLogic() {
+		self.connectionState = .notConnected
+		self.canvasView.isUserInteractionEnabled = true
+		self.showToolPicker()
 	}
 }
 
@@ -258,7 +259,7 @@ extension DrawingViewController: MCSessionDelegate {
 		if let drawing = try? PKDrawing(data: data) {
 			DispatchQueue.main.async { [weak self] in
 				guard let self = self else { return }
-				if self.connectionState == .connectedAsObserver {
+				if self.connectionState.isConnectedAsObserver {
 					self.canvasView.drawing = drawing
 				}
 			}
@@ -301,7 +302,7 @@ extension DrawingViewController: MCBrowserViewControllerDelegate {
 		_ browserViewController: MCBrowserViewController
 	) {
 		dismiss(animated: true, completion: { [weak self] in
-			self?.setupToolPicker()
+			self?.showToolPicker()
 		})
 	}
 
@@ -309,7 +310,8 @@ extension DrawingViewController: MCBrowserViewControllerDelegate {
 		_ browserViewController: MCBrowserViewController
 	) {
 		dismiss(animated: true, completion: { [weak self] in
-			self?.setupToolPicker()
+			self?.showToolPicker()
 		})
 	}
 }
+
